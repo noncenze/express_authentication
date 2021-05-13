@@ -16,10 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 app.use(session({
   secret: SECRET_SESSION,
   resave: false,
@@ -34,6 +30,9 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', (req, res) => {
   res.render('index');
