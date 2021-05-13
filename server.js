@@ -4,6 +4,7 @@ const layouts = require('express-ejs-layouts');
 const app = express();
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('./config/ppConfig');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 
@@ -13,6 +14,10 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(session({
   secret: SECRET_SESSION,
