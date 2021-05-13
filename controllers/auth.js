@@ -5,6 +5,9 @@ const passport = require('../config/ppConfig');
 
 const db = require('../models');
 
+
+
+// GET ROUTES
 router.get('/signup', (req, res) => {
   res.render('auth/signup');
 });
@@ -13,6 +16,15 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
+router.get('/logout', (req, res) => {
+  req.logOut();
+  req.flash('success', 'Logging out... See you next time!');
+  res.redirect('/');
+})
+
+
+
+// POST ROUTES
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
