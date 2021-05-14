@@ -6,7 +6,6 @@ const passport = require('../config/ppConfig');
 const db = require('../models');
 
 
-
 // GET ROUTES
 router.get('/signup', (req, res) => {
   res.render('auth/signup');
@@ -21,6 +20,7 @@ router.get('/logout', (req, res) => {
   req.flash('success', 'Logging out... See you next time!');
   res.redirect('/');
 })
+
 
 
 
@@ -52,7 +52,7 @@ router.post('/signup', async (req, res) => {
         passport.authenticate('local', successObject)(req, res);
     } else {
       // Send back email already exists
-      req.flash('error', 'Email already exists');
+      req.flash('error', 'Email already exists.');
       res.redirect('/auth/signup'); // redirect the user back to sign up page to try again
     }
   } catch (error) {
